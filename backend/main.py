@@ -1,19 +1,23 @@
 import os
 import uuid
+from dotenv import load_dotenv
+
+# Load environment variables FIRST, before importing rag_engine or cache —
+# both of those modules read env vars (GOOGLE_API_KEY, GROQ_API_KEY, REDIS_URL)
+# at import time, so load_dotenv() must run before those imports happen.
+load_dotenv()
+
 from fastapi import FastAPI, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
-from dotenv import load_dotenv
 from rag_engine import process_pdf, ask_question
 from cache import save_message, get_history, get_cached_answer, cache_answer
-
-load_dotenv()
 
 app = FastAPI()
 
 # Allow the React frontend to call this API
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5000"],  # update to match your Vite port
+    allow_origins=["http://localhost:5000"],  # update to match your Vite port / deployed frontend URL
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -30,8 +34,6 @@ async def upload_pdf(file: UploadFile = File(...)):
     with open(file_path, "wb") as f:
         f.write(await file.read())
 
-    # Pass the original filename so enriched metadata shows the real name,
-    # not the random session_id.pdf name used on disk.
     chunk_count = process_pdf(file_path, session_id, original_filename=file.filename)
 
     return {
