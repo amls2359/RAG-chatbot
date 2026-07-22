@@ -1,7 +1,7 @@
 import os
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain_groq import ChatGroq
 from langchain_community.vectorstores import FAISS
 from langchain_core.prompts import ChatPromptTemplate
@@ -12,7 +12,10 @@ from langchain_classic.chains.combine_documents import create_stuff_documents_ch
 vector_stores = {}
 
 # Loaded once and reused across requests. Free, runs locally — no API key needed.
-_embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
+_embeddings = GoogleGenerativeAIEmbeddings(
+    model="models/text-embedding-004",
+    google_api_key=os.getenv("GOOGLE_API_KEY"),
+)
 
 
 def process_pdf(file_path: str, session_id: str, original_filename: str = None):
