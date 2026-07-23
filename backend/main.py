@@ -9,6 +9,7 @@ load_dotenv()
 
 from fastapi import FastAPI, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from rag_engine import process_pdf, ask_question
 from cache import save_message, get_history, get_cached_answer, cache_answer
 
@@ -17,7 +18,7 @@ app = FastAPI()
 # Allow the React frontend to call this API
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://rag-chatbot-pi-green.vercel.app"],  # update to match your Vite port / deployed frontend URL
+    allow_origins=["http://localhost:5173"],  # update to match your Vite port / deployed frontend URL
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -34,7 +35,10 @@ async def upload_pdf(file: UploadFile = File(...)):
     with open(file_path, "wb") as f:
         f.write(await file.read())
 
-    chunk_count = process_pdf(file_path, session_id, original_filename=file.filename)
+    try:
+        chunk_count = process_pdf(file_path, session_id, original_filename=file.filename)
+    except ValueError as e:
+        return JSONResponse(status_code=400, content={"error": str(e)})
 
     return {
         "session_id": session_id,
