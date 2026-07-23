@@ -1,0 +1,41 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563EB"/>
+      <stop offset="100%" stop-color="#0EA5A4"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Rounded square background -->
+  <rect x="0" y="0" width="200" height="200" rx="40" fill="url(#bg)"/>
+
+  <!-- Simplified document page (white, bold shape for small-size legibility) -->
+  <path d="M52 40
+           H118
+           L148 70
+           V152
+           a12 12 0 0 1 -12 12
+           H52
+           a12 12 0 0 1 -12 -12
+           V52
+           a12 12 0 0 1 12 -12 Z"
+        fill="#FFFFFF"/>
+  <!-- Folded corner accent -->
+  <path d="M118 40 L148 70 H130 a12 12 0 0 1 -12 -12 Z" fill="#0EA5A4" opacity="0.55"/>
+
+  <!-- Single bold chat-bubble accent bottom-right, big enough to read at 16px -->
+  <g transform="translate(100, 118)">
+    <path d="M0 22
+             a22 22 0 0 1 22 -22
+             h34
+             a22 22 0 0 1 22 22
+             v6
+             a22 22 0 0 1 -22 22
+             h-16
+             l-16 16
+             v-16
+             a22 22 0 0 1 -22 -22
+             Z"
+          fill="#1F3864"/>
+  </g>
+</svg>
