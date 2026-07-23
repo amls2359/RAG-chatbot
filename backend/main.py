@@ -18,7 +18,7 @@ app = FastAPI()
 # Allow the React frontend to call this API
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # update to match your Vite port / deployed frontend URL
+    allow_origins=["https://rag-chatbot-pi-green.vercel.app"],  # update to match your Vite port / deployed frontend URL
     allow_methods=["*"],
     allow_headers=["*"],
 )
