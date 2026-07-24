@@ -22,9 +22,9 @@
 }
 
 .sidebar.collapsed {
-  width: 64px;
-  padding: 16px 10px;
-  align-items: center;
+  width: 0;
+  padding: 0;
+  border: none;
 }
 
 .sidebar-top {
@@ -225,6 +225,13 @@
   gap: 12px;
 }
 
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-right: auto;
+}
+
 .header-right {
   display: flex;
   align-items: center;
@@ -279,9 +286,9 @@
 }
 
 .empty-brand {
-  font-size: clamp(42px, 8vw, 64px);
+  font-size: clamp(36px, 7vw, 56px);
   font-weight: 600;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
   background: linear-gradient(180deg, #fff 30%, #64748b);
   -webkit-background-clip: text;
   background-clip: text;
@@ -550,20 +557,21 @@
   }
 }
 
+/* ── Upload feedback ── */
 .upload-success {
-  color: #1a7f4e;
+  color: #4ade80;
   font-size: 0.9rem;
-  margin-top: 8px;
+  margin: 0 0 10px;
 }
 
 .upload-error-banner {
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  margin-top: 12px;
+  margin-bottom: 12px;
   padding: 14px 16px;
-  background: #fdf2f2;
-  border: 1px solid #f3c6c6;
+  background: #2a1414;
+  border: 1px solid #5c2a2a;
   border-left: 4px solid #d64545;
   border-radius: 8px;
   animation: error-slide-in 0.2s ease-out;
@@ -572,7 +580,7 @@
 .upload-error-icon {
   font-size: 1.1rem;
   line-height: 1.4;
-  color: #d64545;
+  color: #f87171;
   flex-shrink: 0;
 }
 
@@ -582,14 +590,14 @@
 
 .upload-error-text strong {
   display: block;
-  color: #7a1f1f;
+  color: #fecaca;
   font-size: 0.92rem;
   margin-bottom: 2px;
 }
 
 .upload-error-text p {
   margin: 0;
-  color: #8a3a3a;
+  color: #f0a8a8;
   font-size: 0.88rem;
   line-height: 1.4;
 }
@@ -597,7 +605,7 @@
 .upload-error-dismiss {
   background: none;
   border: none;
-  color: #a35c5c;
+  color: #c47a7a;
   font-size: 1.3rem;
   line-height: 1;
   cursor: pointer;
@@ -606,7 +614,7 @@
 }
 
 .upload-error-dismiss:hover {
-  color: #7a1f1f;
+  color: #fecaca;
 }
 
 @keyframes error-slide-in {
@@ -619,3 +627,4 @@
     transform: translateY(0);
   }
 }
+
